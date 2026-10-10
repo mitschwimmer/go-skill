@@ -1,0 +1,3 @@
+interface:
+  display_name: "Archaic Go"
+  short_description: "Minimal Go development with NixOS, Fish, Helix and SOPS"
