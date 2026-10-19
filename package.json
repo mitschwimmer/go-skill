@@ -1,0 +1,9 @@
+{
+  "name": "go-skill",
+  "private": true,
+  "pi": {
+    "skills": [
+      "./SKILL.md"
+    ]
+  }
+}
