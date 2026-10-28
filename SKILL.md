@@ -69,6 +69,6 @@ Favor minimal, explicit, idiomatic Go projects. Keep Go responsible for modules,
 
 - Avoid replacing Go modules with Nix-managed module imports or making `nix build` the interactive edit-test loop.
 - Avoid treating `nix run` as a universal task runner. Prefer direct Go commands inside the shell; add flake apps for meaningful repeatable entry points only.
-- Keep workstation-global Fish, Helix, and Git configuration distinct from project-specific compiler and tooling.
+- Keep workstation-global Helix, and Git configuration distinct from project-specific compiler and tooling.
 - Keep third-party precompiled Linux binaries in mind: executables expecting FHS interpreter paths may fail on NixOS. Prefer native nixpkgs packages or build from source.
 - When upstream code or the user's explicit requirements differ from these defaults, preserve compatibility and explain the tradeoff rather than imposing conventions blindly.
