@@ -210,11 +210,7 @@ func Compare(baseDir, candidateDir, outputDir string) (Summary, error) {
 			result.Entries = append(result.Entries, row)
 		}
 		if !found {
-			if status == "unchanged" {
-				return result, fmt.Errorf("scenario %s has no candidate captures", id)
-			}
-			result.Counts[status]++
-			result.Entries = append(result.Entries, Change{Name: id, Status: status})
+			return result, fmt.Errorf("scenario %s has no candidate captures", id)
 		}
 	}
 	for _, image := range base.Images {
