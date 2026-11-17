@@ -153,8 +153,8 @@ func (r Runner) Capture(ctx context.Context, opts Options) (visualtest.Manifest,
 			m.Contracts[def.ID] = visualtest.Hash([]byte(def.Fingerprint() + "NO_CASE"))
 			continue // an old, now-retired case
 		}
-		if c.Fixture != def.Fixture || c.Serve == nil || c.Run == nil {
-			return m, fmt.Errorf("scenario %s has incompatible fixture or missing Serve/Run", def.ID)
+		if c.Fixture != def.Fixture || c.Serve == nil || c.Run == nil || len(c.ContractFiles) == 0 {
+			return m, fmt.Errorf("scenario %s has incompatible fixture, missing Serve/Run, or no contract source files", def.ID)
 		}
 		fingerprint, err := contract(opts.ProjectRoot, def, c.ContractFiles)
 		if err != nil {
