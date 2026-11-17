@@ -1,0 +1,35 @@
+name: Archaic Go visualtest
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6
+        with:
+          go-version: '1.25.3'
+          cache: true
+      - name: Configure installed Chromium
+        run: |
+          browser="$(command -v google-chrome || command -v chromium || true)"
+          test -n "$browser"
+          echo "VISUALTEST_BROWSER_EXECUTABLE=$browser" >> "$GITHUB_ENV"
+          echo "VISUALTEST_NO_SANDBOX=1" >> "$GITHUB_ENV"
+          "$browser" --version
+      - name: Validate Go packages and Rod browser smoke test
+        run: |
+          go mod verify
+          go test ./...
+          go vet ./...
