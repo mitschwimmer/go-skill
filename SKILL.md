@@ -1,6 +1,6 @@
 ---
 name: archaic-go
-description: Develop, review, maintain, and package Go projects using Archaic Go conventions on NixOS. Use for Go project scaffolding, Go code changes, development environment design, build/test workflows, Helix integration, project maintenance skills, and SOPS/age secrets handling when the user requests Archaic Go or works in a repository adopting these conventions.
+description: Develop, review, maintain, and package Go projects using Archaic Go conventions on NixOS. Use for Go scaffolding and code changes, build/test workflows, browser UI scenarios and screenshot-based PR review, Helix/NixOS integration, project maintenance skills, and SOPS/age secrets when the user requests Archaic Go or works in a repository adopting these conventions.
 ---
 
 # Archaic Go
@@ -65,6 +65,7 @@ Favor minimal, explicit, idiomatic Go projects. Keep Go responsible for modules,
 - Prefer real components and lightweight fixtures to mocks; use test doubles only at meaningful boundaries.
 - Keep tests deterministic with explicit setup and cleanup. Use table-driven tests when they improve readability.
 - Run relevant unit and integration tests; use race detection when concurrency is involved.
+- For browser-facing applications, define stable, test-referenced UI scenarios and capture their views using a real browser. Keep screenshot tooling outside production; follow [scenario-driven browser testing](references/ui-scenarios.md) for scenario identity, reproducibility and `main`-based PR visual comparisons.
 
 ### API protocols and compatibility
 - Choose API protocols per project based on interoperability, performance, evolution, tooling, and operations.
@@ -78,11 +79,13 @@ Favor minimal, explicit, idiomatic Go projects. Keep Go responsible for modules,
 - Cover purpose, architecture and invariants, code navigation, environment and configuration, build/test/run commands, common changes and extension points, debugging, and release or operational procedures as applicable.
 - Keep `SKILL.md` concise with clear triggering metadata; put detailed procedures and reusable helpers in linked references or scripts. Make the entry point discoverable from the repository's existing agent instructions or a minimal link.
 - Read the project's skill before changing the project and update it alongside changes to behavior, architecture, tooling, or maintenance procedures. For an existing project without one, create it from verified repository facts; do not invent commands or procedures.
+- For projects with browser UI scenarios, record their fixture and browser test workflow, screenshot commands, and PR visual review process in the project-specific skill.
 
 ## Task-specific guidance
 
 - **New Go project or environment setup:** Read [references/new-project.md](references/new-project.md) before creating files, selecting tooling, or defining a development flake. Do not load it for routine code changes or reviews.
 - **Existing project changes:** Read the project's maintenance skill and inspect current patterns first; apply the principles above incrementally. Use ordinary Go tools to validate the relevant changes and report any checks not run.
+- **Browser UI development or review:** Read [references/ui-scenarios.md](references/ui-scenarios.md) before adding scenario IDs, browser screenshots, or PR visual comparisons. Reuse the application's existing browser suite first.
 
 ## Boundaries
 
